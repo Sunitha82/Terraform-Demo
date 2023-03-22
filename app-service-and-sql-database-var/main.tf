@@ -61,7 +61,7 @@ resource "azurerm_mssql_server" "test" {
   ]
 }
 
-resource "azurerm_sql_database" "test" {
+resource "azurerm_mssql_database" "test" {
   name                = "terraform-sqldatabase"
   resource_group_name = azurerm_resource_group.RG-Terraform.name
   location            = azurerm_resource_group.RG-Terraform.location
@@ -72,6 +72,6 @@ resource "azurerm_sql_database" "test" {
   }
   depends_on = [
     azurerm_resource_group.RG-Terraform,
-    azurerm_sql_server.test.name
+    azurerm_mssql_server.test.name
   ]
 }
