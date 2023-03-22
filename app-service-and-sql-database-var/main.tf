@@ -6,7 +6,7 @@ provider "azurerm" {
 
 
 resource "azurerm_resource_group" "RG-Terraform" {
-  name     = "terraform-resource-group-1"
+  name     = "terraform-resource-group-2"
   location = "West Europe"
 }
 
@@ -49,7 +49,7 @@ resource "azurerm_app_service" "AS-Terraform" {
   ]
 }
 
-resource "azurerm_sql_server" "test" {
+resource "azurerm_mssql_server" "test" {
   name                         = "terraform-sqlserver"
   resource_group_name          = azurerm_resource_group.RG-Terraform.name
   location                     = azurerm_resource_group.RG-Terraform.location
@@ -65,7 +65,7 @@ resource "azurerm_sql_database" "test" {
   name                = "terraform-sqldatabase"
   resource_group_name = azurerm_resource_group.RG-Terraform.name
   location            = azurerm_resource_group.RG-Terraform.location
-  server_name         = azurerm_sql_server.test.name
+  server_name         = azurerm_mssql_server.test.name
 
   tags = {
     environment = "production"
