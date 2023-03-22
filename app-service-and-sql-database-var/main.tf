@@ -14,19 +14,17 @@ resource "azurerm_service_plan" "ASP-TerraForm" {
   name                = "terraform-appserviceplan"
   location            = azurerm_resource_group.RG-Terraform.location
   resource_group_name = azurerm_resource_group.RG-Terraform.name
-  kind = "Windows"
+  os_type             = "Windows"
+  sku_name            = "P1v2"
 
-  sku {
-    tier = "Standard"
-    size = "S1"
-  }
+  
 }
 
 resource "azurerm_app_service" "AS-Terraform" {
   name                = "app-service-terraform"
   location            = azurerm_resource_group.RG-Terraform.location
   resource_group_name = azurerm_resource_group.RG-Terraform.name
-  app_service_plan_id = azurerm_app_service_plan.ASP-TerraForm.id
+  app_service_plan_id = azurerm_service_plan.ASP-TerraForm.id
 
   site_config {
     dotnet_framework_version = "v6.0"
